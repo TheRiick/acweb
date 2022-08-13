@@ -1,8 +1,8 @@
 FROM golang
 
-ADD . /go/src/github.com/assetto-corsa-web/acweb/
+ADD . /go/src/github.com/TheRiick/acweb/
 COPY configs /config
-WORKDIR /go/src/github.com/assetto-corsa-web/acweb/
+WORKDIR /go/src/github.com/TheRiick/acweb/
 
 # install node
 RUN apt-get update && \
@@ -16,7 +16,7 @@ ENV GOPATH=/go
 RUN go build -ldflags "-s -w" main.go
 
 # build frontend
-RUN cd /go/src/github.com/assetto-corsa-web/acweb/public && npm install && npm run build
+RUN cd /go/src/github.com/TheRiick/acweb/public && npm install && npm run build
 
 # configure and run
 ENV ACWEB_HOST=:8080
@@ -39,4 +39,4 @@ ENV ACWEB_DB_ROOT_CERT=
 # expose Assetto Corsa folder
 VOLUME ["/ac", "/logs", "/instance_logs", "/config"]
 
-CMD ["/go/src/github.com/assetto-corsa-web/acweb/main"]
+CMD ["/go/src/github.com/TheRiick/acweb/main"]
